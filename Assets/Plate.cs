@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class Plate : MonoBehaviour
 {
@@ -10,9 +11,16 @@ public class Plate : MonoBehaviour
     [SerializeField] private int value;
     [SerializeField] private MeshRenderer meshRenderer;
 
+    private int currentState;
+
+    public float duration;
+    public int vibrato;
+    public float strength;
+    public float randomness;
+
     private void OnMouseDown()
     {
-        TakeDamage(1);
+        // TakeDamage(1);
     }
 
     public void SetNewValue(int newValue = 0)
@@ -25,13 +33,11 @@ public class Plate : MonoBehaviour
     public void TakeDamage(int damageValue)
     {
         value -= damageValue;
-
         UpdateView();
     }
 
     private void UpdateView()
     {
-
         SetColorDependsOnValue();
 
         if (CheckOnZeroValue())
@@ -65,11 +71,30 @@ public class Plate : MonoBehaviour
 
     private void SetColorDependsOnValue()
     {
+        var state = GetStateDependsOnValue();
+        if (currentState > state)
+        {
+            transform.DOShakePosition(0.15f, 0.5f, 10, 90);
+        }
 
-        var newColor = ColorsHandler.Instance.GetNewPlateColor(value);
+        currentState = state;
+        var newColor = ColorsHandler.Instance.GetNewPlateColor(state);
         var currentMaterial = meshRenderer.material;
         meshRenderer.material = new Material(currentMaterial);
-        Debug.Log(newColor);
         meshRenderer.material.color = newColor;
+    }
+
+    private int GetStateDependsOnValue()
+    {
+        int state = 0;
+        if (value <= 0)
+        {
+            state = 0;
+        }
+        if (value >= 1 && value <= 6)
+        {
+            state = 1;
+        }
+        return state;
     }
 }

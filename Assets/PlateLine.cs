@@ -13,4 +13,12 @@ public class PlateLine : MonoBehaviour
             platesList[i].SetNewValue(value);
         }
     }
+
+    public void SetMixedPlatesValue(int minValue, int MaxValue)
+    {
+        for (int i = 0; i < platesList.Count; i++)
+        {
+            platesList[i].SetNewValue(Random.Range(minValue, MaxValue + 1));
+        }
+    }
 }

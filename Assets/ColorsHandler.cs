@@ -14,19 +14,13 @@ public class ColorsHandler : MonoBehaviour
         Instance = this;
     }
 
-    public Color GetNewPlateColor(int plateValue)
+    public Color GetNewPlateColor(int state)
     {
-        if (plateValue <= 0)
-        {
-            return platesColors[0];
-        }
+        return platesColors[state];
+    }
 
-        if (plateValue <= 6)
-        {
-            return platesColors[1];
-        }
-
-
-        return platesColors[0];
+    public Color GetLerpedColor(int value)
+    {
+        return new Color();
     }
 }
