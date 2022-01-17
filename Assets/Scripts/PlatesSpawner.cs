@@ -10,13 +10,16 @@ public class PlatesSpawner : MonoBehaviour
     [SerializeField] private int mixedPlatesSpawnRequires;
     [SerializeField] private int currentMixedPlatesSpawned;
 
+    [Space]
     [SerializeField] private int startPlateLinesCount;
     [SerializeField] private float startPlateLineZPos;
     private float lastPlateLineZPos;
 
+    [Space]
     [SerializeField] private GameObject plateLinePrefab;
     [SerializeField] private Transform plateLinesContainer;
 
+    [Space]
     [SerializeField] private List<int> platesValues = new List<int>();
     [SerializeField] private int currentPlateValueIndex;
 
@@ -34,11 +37,22 @@ public class PlatesSpawner : MonoBehaviour
             if (needSpawnMixedPlates)
             {
                 SpawnMixedHorizontalLine(platesValues[currentPlateValueIndex - 1], platesValues[currentPlateValueIndex]);
+                HandleMixedLinesSpawnedCount();
             }
             else
             {
                 SpawnHorizontalLine();
             }
+        }
+    }
+
+    private void HandleMixedLinesSpawnedCount()
+    {
+        currentMixedPlatesSpawned++;
+        if (currentMixedPlatesSpawned >= mixedPlatesSpawnRequires)
+        {
+            currentMixedPlatesSpawned = 0;
+            needSpawnMixedPlates = false;
         }
     }
 

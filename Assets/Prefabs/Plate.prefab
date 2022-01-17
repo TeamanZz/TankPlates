@@ -269,6 +269,7 @@ MonoBehaviour:
   valueText: {fileID: 6102905222415711430}
   value: 0
   meshRenderer: {fileID: 6592299080548358043}
+  particles: {fileID: 130848, guid: 9fbfdb8d923148e4299b295c120e2246, type: 3}
 --- !u!65 &9122938150258776557
 BoxCollider:
   m_ObjectHideFlags: 0

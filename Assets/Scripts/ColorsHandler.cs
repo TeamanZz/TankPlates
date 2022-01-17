@@ -21,6 +21,11 @@ public class ColorsHandler : MonoBehaviour
 
     public Color GetLerpedColor(int value)
     {
+        if (value >= 1 && value <= 6)
+        {
+            float tVal = (float)value / 6;
+            return Color.Lerp(platesColors[1], platesColors[2], tVal);
+        }
         return new Color();
     }
 }

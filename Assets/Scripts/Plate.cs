@@ -10,17 +10,12 @@ public class Plate : MonoBehaviour
 
     [SerializeField] private int value;
     [SerializeField] private MeshRenderer meshRenderer;
-
-    private int currentState;
-
-    public float duration;
-    public int vibrato;
-    public float strength;
-    public float randomness;
+    [SerializeField] private GameObject particles;
 
     private void OnMouseDown()
     {
-        // TakeDamage(1);
+        TakeDamage(1);
+        Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
     }
 
     public void SetNewValue(int newValue = 0)
@@ -71,14 +66,14 @@ public class Plate : MonoBehaviour
 
     private void SetColorDependsOnValue()
     {
-        var state = GetStateDependsOnValue();
-        if (currentState > state)
+        // var state = GetStateDependsOnValue();
+        if (value <= 0)
         {
             transform.DOShakePosition(0.15f, 0.5f, 10, 90);
         }
 
-        currentState = state;
-        var newColor = ColorsHandler.Instance.GetNewPlateColor(state);
+        // currentState = state;
+        var newColor = ColorsHandler.Instance.GetLerpedColor(value);
         var currentMaterial = meshRenderer.material;
         meshRenderer.material = new Material(currentMaterial);
         meshRenderer.material.color = newColor;
