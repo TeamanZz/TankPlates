@@ -11,10 +11,9 @@ public class PlateLine : MonoBehaviour
     public void DecreasePlatesCount()
     {
         platesCount--;
+
         if (platesCount <= 0)
-        {
             PlatesSpawner.Instance.RemoveElementFromArray(this);
-        }
     }
 
     public void SetPlatesValue(int value = 0)
