@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TankProjectile : MonoBehaviour
 {
-    public int damage;
+    public int damage = 1;
     private Plate plate;
     private ReflectionSurface surface;
     private Rigidbody rb;
@@ -21,16 +21,23 @@ public class TankProjectile : MonoBehaviour
         velocity = rb.velocity;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<Plate>(out plate))
         {
             if (!plate.enabled)
                 return;
-            plate.TakeDamage(damage);
-            Destroy(gameObject);
-        }
 
+            plate.TakeDamage(1);
+
+            damage--;
+            if (damage <= 0)
+                Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
         if (other.gameObject.TryGetComponent<ReflectionSurface>(out surface))
         {
             Reflect(other);

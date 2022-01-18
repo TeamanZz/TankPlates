@@ -10,11 +10,18 @@ public class TankTurretShooting : MonoBehaviour
     [SerializeField] private GameObject shootParticles;
     [SerializeField] private float delayBetweenShot = 1;
 
+    [SerializeField] private float projectileDamage = 1;
+
     private float currentTimerValue;
 
     private void Awake()
     {
         currentTimerValue = delayBetweenShot;
+    }
+
+    public void SetNewProjectileDamage(int value)
+    {
+        projectileDamage = value;
     }
 
     private void Update()
@@ -26,6 +33,7 @@ public class TankTurretShooting : MonoBehaviour
             // var newParticles = Instantiate(shootParticles, shootPoint.position, transform.GetChild(1).localRotation);
             var forceVector = shootPoint.position - tankOrigin.position;
             newBullet.GetComponent<Rigidbody>().AddForce(forceVector.normalized * 5, ForceMode.Impulse);
+            newBullet.GetComponent<TankProjectile>().damage = (int)projectileDamage;
             currentTimerValue = delayBetweenShot;
         }
     }

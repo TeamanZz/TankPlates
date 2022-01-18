@@ -5,8 +5,9 @@ using TMPro;
 public class ProgressController : MonoBehaviour
 {
     public static ProgressController Instance;
-    public int ourMoney = 30;
-    public TextMeshProUGUI ourMoneyText;
+
+    public int moneyCount = 30;
+    public TextMeshProUGUI moneyCountText;
 
     [Header("Damage settings")]
     public int damageUpgradeCost = 10;
@@ -35,18 +36,18 @@ public class ProgressController : MonoBehaviour
     public TextMeshProUGUI dispatchCostText;
     public TextMeshProUGUI dispatchLvlText;
 
+    public TankTurretShooting tankTurret;
+
     public void Awake()
     {
         Instance = this;
-        //ourMoney = PlayerPrefs.GetInt("OurMoney");
 
-        //damageUpgradeCost = PlayerPrefs.GetInt("damageUpgradeCost");
-        //damageLvl = PlayerPrefs.GetInt("damageLvl");
+        InitializeCost();
+        moneyCountText.text = moneyCount.ToString();
+    }
 
-        //incomeUpgradeCost = PlayerPrefs.GetInt("incomeUpgradeCost");
-        //incomeLvl = PlayerPrefs.GetInt("incomeLvl");
-        ////  save data
-
+    private void InitializeCost()
+    {
         damageCostText.text = damageUpgradeCost.ToString();
         damageLvlText.text = "LVL " + damageLvl.ToString();
 
@@ -55,45 +56,37 @@ public class ProgressController : MonoBehaviour
 
         dispatchCostText.text = dispatchUprageCost.ToString();
         dispatchLvlText.text = "LVL " + dispatchLvl.ToString();
-
-
-        ourMoneyText.text = ourMoney.ToString();
-        // data output
     }
 
-    public void AddingMoney(int addMoney)
+    public void AddMoney(int addMoney)
     {
-        ourMoney += addMoney;
-        ourMoneyText.text = ourMoney.ToString();
+        moneyCount += addMoney;
+        moneyCountText.text = moneyCount.ToString();
     }
 
     public void DamageImprovement()
     {
-        if (ourMoney < damageUpgradeCost)
+        if (moneyCount < damageUpgradeCost)
             return;
 
-        ourMoney -= damageUpgradeCost;
+        moneyCount -= damageUpgradeCost;
 
-        Debug.Log("Good");
         damageLvl += 1;
+        tankTurret.SetNewProjectileDamage(damageLvl);
         damageUpgradeCost += damagePriceIncrease;
 
         damageLvlText.text = "LVL " + damageLvl.ToString();
         damageCostText.text = damageUpgradeCost.ToString();
 
-        ourMoneyText.text = ourMoney.ToString();
-        Debug.Log("VeryGood");
-        //PlayerPrefs.SetInt("damageUpgradeCost", damageUpgradeCost); 
-        //PlayerPrefs.SetInt("damageLvl", damageLvl);
-        //PlayerPrefs.SetInt("OurMoney", ourMoney);
+        moneyCountText.text = moneyCount.ToString();
     }
 
     public void IncomeImprovement()
     {
-        if (ourMoney < incomeUpgradeCost)
+        if (moneyCount < incomeUpgradeCost)
             return;
 
-        ourMoney -= incomeUpgradeCost;
+        moneyCount -= incomeUpgradeCost;
 
         incomeLvl += 1;
         incomeUpgradeCost += incomePriceIncrease;
@@ -101,18 +94,15 @@ public class ProgressController : MonoBehaviour
         incomeLvlText.text = "LVL " + incomeLvl.ToString();
         incomeCostText.text = incomeUpgradeCost.ToString();
 
-        ourMoneyText.text = ourMoney.ToString();
-        //PlayerPrefs.SetInt("incomeUpgradeCost", incomeUpgradeCost);
-        //PlayerPrefs.SetInt("incomeLvl", incomeLvl);
-        //PlayerPrefs.SetInt("OurMoney", ourMoney);
+        moneyCountText.text = moneyCount.ToString();
     }
 
     public void DispatchImprovement()
     {
-        if (ourMoney < dispatchUprageCost)
+        if (moneyCount < dispatchUprageCost)
             return;
 
-        ourMoney -= dispatchUprageCost;
+        moneyCount -= dispatchUprageCost;
 
         dispatchLvl += 1;
         dispatchUprageCost += dispatchPriceIncrease;
@@ -120,9 +110,6 @@ public class ProgressController : MonoBehaviour
         dispatchLvlText.text = "LVL " + dispatchLvl.ToString();
         dispatchCostText.text = dispatchUprageCost.ToString();
 
-        ourMoneyText.text = ourMoney.ToString();
-        //PlayerPrefs.SetInt("incomeUpgradeCost", incomeUpgradeCost);
-        //PlayerPrefs.SetInt("incomeLvl", incomeLvl);
-        //PlayerPrefs.SetInt("OurMoney", ourMoney);
+        moneyCountText.text = moneyCount.ToString();
     }
 }

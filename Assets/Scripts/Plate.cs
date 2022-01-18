@@ -51,9 +51,10 @@ public class Plate : MonoBehaviour
         SetDefaultColor();
         ShakePlate();
         DisableText();
+        ProgressController.Instance.AddMoney(1);
         transform.parent.GetComponent<PlateLine>().DecreasePlatesCount();
-        this.enabled = false;
         GetComponent<BoxCollider>().enabled = false;
+        this.enabled = false;
     }
 
     private bool CheckOnZeroValue()

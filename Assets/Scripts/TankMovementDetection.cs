@@ -10,7 +10,7 @@ public class TankMovementDetection : MonoBehaviour
     {
         if (other.TryGetComponent<PlateLine>(out plateLine))
         {
-            tankMovement.needMoveForward = false;
+            // tankMovement.needMoveForward = false;
         }
     }
 
@@ -18,7 +18,7 @@ public class TankMovementDetection : MonoBehaviour
     {
         if (other.TryGetComponent<PlateLine>(out plateLine))
         {
-            tankMovement.needMoveForward = true;
+            // tankMovement.needMoveForward = true;
         }
     }
 }

@@ -47,7 +47,7 @@ public class TankMovement : MonoBehaviour
 
     public void CheckOnMoveForward(Vector3 nearestLinePos)
     {
-        if (Mathf.Abs(nearestLinePos.z - transform.position.z) > 5)
+        if (Mathf.Abs(nearestLinePos.z - transform.position.z) > 10)
         {
             lastNearestLinePos = nearestLinePos;
             needMoveForward = true;
@@ -56,7 +56,7 @@ public class TankMovement : MonoBehaviour
 
     private void CheckOnDisableMoveForward()
     {
-        if (Mathf.Abs(lastNearestLinePos.z - transform.position.z) <= 5)
+        if (Mathf.Abs(lastNearestLinePos.z - transform.position.z) <= 10)
         {
             needMoveForward = false;
         }
