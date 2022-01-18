@@ -20,14 +20,25 @@ public class PlatesSpawner : MonoBehaviour
     [SerializeField] private Transform plateLinesContainer;
 
     [Space]
-    [SerializeField] private List<int> platesValues = new List<int>();
     [SerializeField] private int currentPlateValueIndex;
+    [SerializeField] private List<int> platesValues = new List<int>();
 
+    [SerializeField] private List<PlateLine> plateLinesList = new List<PlateLine>();
+
+
+    [SerializeField] private TankMovement tankMovement;
     private void Awake()
     {
         Instance = this;
 
         lastPlateLineZPos = startPlateLineZPos;
+    }
+
+    public void RemoveElementFromArray(PlateLine line)
+    {
+        plateLinesList.Remove(line);
+
+        tankMovement.CheckOnMoveForward(plateLinesList[0].transform.position);
     }
 
     private void Start()
@@ -61,18 +72,22 @@ public class PlatesSpawner : MonoBehaviour
     {
         Vector3 newLinePosition = new Vector3(0, 0, lastPlateLineZPos);
         var newLine = Instantiate(plateLinePrefab, newLinePosition, Quaternion.identity);
-        newLine.GetComponent<PlateLine>().SetPlatesValue(platesValues[currentPlateValueIndex]);
+        var plateLineComponent = newLine.GetComponent<PlateLine>();
+        plateLineComponent.SetPlatesValue(platesValues[currentPlateValueIndex]);
         newLine.transform.SetParent(plateLinesContainer);
         lastPlateLineZPos += 2;
+        plateLinesList.Add(plateLineComponent);
     }
 
     public void SpawnMixedHorizontalLine(int minValue, int maxValue)
     {
         Vector3 newLinePosition = new Vector3(0, 0, lastPlateLineZPos);
         var newLine = Instantiate(plateLinePrefab, newLinePosition, Quaternion.identity);
-        newLine.GetComponent<PlateLine>().SetMixedPlatesValue(minValue, maxValue);
+        var plateLineComponent = newLine.GetComponent<PlateLine>();
+        plateLineComponent.SetMixedPlatesValue(minValue, maxValue);
         newLine.transform.SetParent(plateLinesContainer);
         lastPlateLineZPos += 2;
+        plateLinesList.Add(plateLineComponent);
     }
 
     private void HandleMixedLinesSpawnedCount()

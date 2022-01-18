@@ -12,12 +12,20 @@ public class TankMovement : MonoBehaviour
 
     private int directionSign = 1;
 
+    private Vector3 lastNearestLinePos;
+
     void Update()
     {
         if (needMoveForward)
         {
             MoveTankForward();
             MoveCameraForward();
+
+            if (Mathf.Abs(lastNearestLinePos.z - transform.position.z) <= 5)
+            {
+                Debug.Log("QQQQQQQQQQ");
+                needMoveForward = false;
+            }
         }
 
         if (canMoveAutomaticaly)
@@ -37,6 +45,16 @@ public class TankMovement : MonoBehaviour
     private void OnMouseDrag()
     {
         MoveHorizontalManually();
+    }
+
+    public void CheckOnMoveForward(Vector3 nearestLinePos)
+    {
+        Debug.Log(Mathf.Abs(nearestLinePos.z - transform.position.z));
+        if (Mathf.Abs(nearestLinePos.z - transform.position.z) > 5)
+        {
+            lastNearestLinePos = nearestLinePos;
+            needMoveForward = true;
+        }
     }
 
     private void MoveHorizontalManually()
