@@ -23,7 +23,7 @@ public class TankTurretShooting : MonoBehaviour
         {
             var newBullet = Instantiate(projectilePrefab, shootPoint.position, transform.GetChild(1).localRotation);
             var forceVector = shootPoint.position - tankOrigin.position;
-            newBullet.GetComponent<Rigidbody>().AddForce(forceVector * 5, ForceMode.Impulse);
+            newBullet.GetComponent<Rigidbody>().AddForce(forceVector.normalized * 5, ForceMode.Impulse);
             currentTimerValue = delayBetweenShot;
         }
     }

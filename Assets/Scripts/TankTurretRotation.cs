@@ -22,7 +22,7 @@ public class TankTurretRotation : MonoBehaviour
         float angle = turret.localRotation.eulerAngles.y;
         angle = (angle > 180) ? angle - 360 : angle;
 
-        if (Mathf.Abs(angle) >= rotateAngle)
+        if (Mathf.Abs(angle) >= rotateAngle - 0.5f)
             directionCoefficient *= -1;
     }
 }
