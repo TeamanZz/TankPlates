@@ -8,9 +8,19 @@ public class PlateLine : MonoBehaviour
 
     public void SetPlatesValue(int value = 0)
     {
-        for (int i = 0; i < platesList.Count; i++)
+        if (value == 0)
         {
-            platesList[i].SetNewValue(value);
+            for (int i = 0; i < platesList.Count; i++)
+            {
+                platesList[i].SetEmptyValues();
+            }
+        }
+        else
+        {
+            for (int i = 0; i < platesList.Count; i++)
+            {
+                platesList[i].SetNewValue(value);
+            }
         }
     }
 

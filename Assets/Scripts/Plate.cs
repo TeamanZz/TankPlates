@@ -12,10 +12,13 @@ public class Plate : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private GameObject particles;
 
-    private void OnMouseDown()
+    public void SetEmptyValues()
     {
-        TakeDamage(1);
-        Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+        value = 0;
+        SetColorDependsOnValue();
+        DisableText();
+        this.enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
     }
 
     public void SetNewValue(int newValue = 0)
@@ -27,6 +30,8 @@ public class Plate : MonoBehaviour
 
     public void TakeDamage(int damageValue)
     {
+        if (value <= 0)
+            return;
         value -= damageValue;
         UpdateView();
     }
@@ -50,7 +55,10 @@ public class Plate : MonoBehaviour
     {
         if (value <= 0)
         {
+            var newParticles = Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
             DisableText();
+            this.enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
             return true;
         }
         else

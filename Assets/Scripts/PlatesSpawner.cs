@@ -65,7 +65,7 @@ public class PlatesSpawner : MonoBehaviour
     {
         for (int i = 0; i < startPlateLinesCount / 2; i++)
         {
-            SpawnHorizontalLine();
+            SpawnEmptyHorizontalLine();
         }
 
         for (int i = 0; i < startPlateLinesCount / 2; i++)
@@ -88,6 +88,15 @@ public class PlatesSpawner : MonoBehaviour
         Vector3 newLinePosition = new Vector3(0, 0, lastPlateLineZPos);
         var newLine = Instantiate(plateLinePrefab, newLinePosition, Quaternion.identity);
         newLine.GetComponent<PlateLine>().SetPlatesValue(platesValues[currentPlateValueIndex]);
+        newLine.transform.SetParent(plateLinesContainer);
+        lastPlateLineZPos += 2;
+    }
+
+    public void SpawnEmptyHorizontalLine()
+    {
+        Vector3 newLinePosition = new Vector3(0, 0, lastPlateLineZPos);
+        var newLine = Instantiate(plateLinePrefab, newLinePosition, Quaternion.identity);
+        newLine.GetComponent<PlateLine>().SetPlatesValue(0);
         newLine.transform.SetParent(plateLinesContainer);
         lastPlateLineZPos += 2;
     }
