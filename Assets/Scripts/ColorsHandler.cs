@@ -28,4 +28,9 @@ public class ColorsHandler : MonoBehaviour
         }
         return new Color();
     }
+
+    public Color GetDefaultColor()
+    {
+        return platesColors[0];
+    }
 }

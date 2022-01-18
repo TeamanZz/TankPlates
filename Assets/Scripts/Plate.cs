@@ -12,59 +12,52 @@ public class Plate : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private GameObject particles;
 
-    public void SetEmptyValues()
+    public void SetPlateAsEmptyOnStart()
     {
         value = 0;
-        SetColorDependsOnValue();
+        SetDefaultColor();
         DisableText();
         this.enabled = false;
         GetComponent<BoxCollider>().enabled = false;
     }
 
-    public void SetNewValue(int newValue = 0)
+    public void SetNewNonZeroValue(int newValue = 1)
     {
         value = newValue;
-
-        UpdateView();
+        UpdateTextValue();
+        SetColorDependsOnValue();
     }
 
     public void TakeDamage(int damageValue)
     {
-        if (value <= 0)
-            return;
         value -= damageValue;
-        UpdateView();
-    }
-
-    private void UpdateView()
-    {
-        SetColorDependsOnValue();
-
         if (CheckOnZeroValue())
-            return;
-
-        UpdateValueView();
+            KillPlate();
+        else
+        {
+            UpdateTextValue();
+            SetColorDependsOnValue();
+        }
     }
 
-    public void UpdateValueView()
+    private void UpdateTextValue()
     {
         valueText.text = value.ToString();
     }
 
+    private void KillPlate()
+    {
+        var newParticles = Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
+        SetDefaultColor();
+        ShakePlate();
+        DisableText();
+        this.enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
+    }
+
     private bool CheckOnZeroValue()
     {
-        if (value <= 0)
-        {
-            var newParticles = Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
-            DisableText();
-            this.enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (value <= 0);
     }
 
     private void DisableText()
@@ -72,32 +65,24 @@ public class Plate : MonoBehaviour
         valueText.gameObject.SetActive(false);
     }
 
+    private void ShakePlate()
+    {
+        transform.DOShakePosition(0.15f, 0.5f, 10, 90);
+    }
+
     private void SetColorDependsOnValue()
     {
-        // var state = GetStateDependsOnValue();
-        if (value <= 0)
-        {
-            transform.DOShakePosition(0.15f, 0.5f, 10, 90);
-        }
-
-        // currentState = state;
         var newColor = ColorsHandler.Instance.GetLerpedColor(value);
         var currentMaterial = meshRenderer.material;
         meshRenderer.material = new Material(currentMaterial);
         meshRenderer.material.color = newColor;
     }
 
-    private int GetStateDependsOnValue()
+    private void SetDefaultColor()
     {
-        int state = 0;
-        if (value <= 0)
-        {
-            state = 0;
-        }
-        if (value >= 1 && value <= 6)
-        {
-            state = 1;
-        }
-        return state;
+        var newColor = ColorsHandler.Instance.GetDefaultColor();
+        var currentMaterial = meshRenderer.material;
+        meshRenderer.material = new Material(currentMaterial);
+        meshRenderer.material.color = newColor;
     }
 }

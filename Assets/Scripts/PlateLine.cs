@@ -8,19 +8,9 @@ public class PlateLine : MonoBehaviour
 
     public void SetPlatesValue(int value = 0)
     {
-        if (value == 0)
+        for (int i = 0; i < platesList.Count; i++)
         {
-            for (int i = 0; i < platesList.Count; i++)
-            {
-                platesList[i].SetEmptyValues();
-            }
-        }
-        else
-        {
-            for (int i = 0; i < platesList.Count; i++)
-            {
-                platesList[i].SetNewValue(value);
-            }
+            platesList[i].SetNewNonZeroValue(value);
         }
     }
 
@@ -28,7 +18,15 @@ public class PlateLine : MonoBehaviour
     {
         for (int i = 0; i < platesList.Count; i++)
         {
-            platesList[i].SetNewValue(Random.Range(minValue, MaxValue + 1));
+            platesList[i].SetNewNonZeroValue(Random.Range(minValue, MaxValue + 1));
+        }
+    }
+
+    public void SetEmptyPlates()
+    {
+        for (int i = 0; i < platesList.Count; i++)
+        {
+            platesList[i].SetPlateAsEmptyOnStart();
         }
     }
 }

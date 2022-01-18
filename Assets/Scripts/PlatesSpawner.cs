@@ -30,32 +30,6 @@ public class PlatesSpawner : MonoBehaviour
         lastPlateLineZPos = startPlateLineZPos;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if (needSpawnMixedPlates)
-            {
-                SpawnMixedHorizontalLine(platesValues[currentPlateValueIndex - 1], platesValues[currentPlateValueIndex]);
-                HandleMixedLinesSpawnedCount();
-            }
-            else
-            {
-                SpawnHorizontalLine();
-            }
-        }
-    }
-
-    private void HandleMixedLinesSpawnedCount()
-    {
-        currentMixedPlatesSpawned++;
-        if (currentMixedPlatesSpawned >= mixedPlatesSpawnRequires)
-        {
-            currentMixedPlatesSpawned = 0;
-            needSpawnMixedPlates = false;
-        }
-    }
-
     private void Start()
     {
         SpawnStartPlateLines();
@@ -74,11 +48,11 @@ public class PlatesSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnMixedHorizontalLine(int minValue, int maxValue)
+    public void SpawnEmptyHorizontalLine()
     {
         Vector3 newLinePosition = new Vector3(0, 0, lastPlateLineZPos);
         var newLine = Instantiate(plateLinePrefab, newLinePosition, Quaternion.identity);
-        newLine.GetComponent<PlateLine>().SetMixedPlatesValue(minValue, maxValue);
+        newLine.GetComponent<PlateLine>().SetEmptyPlates();
         newLine.transform.SetParent(plateLinesContainer);
         lastPlateLineZPos += 2;
     }
@@ -92,12 +66,39 @@ public class PlatesSpawner : MonoBehaviour
         lastPlateLineZPos += 2;
     }
 
-    public void SpawnEmptyHorizontalLine()
+    public void SpawnMixedHorizontalLine(int minValue, int maxValue)
     {
         Vector3 newLinePosition = new Vector3(0, 0, lastPlateLineZPos);
         var newLine = Instantiate(plateLinePrefab, newLinePosition, Quaternion.identity);
-        newLine.GetComponent<PlateLine>().SetPlatesValue(0);
+        newLine.GetComponent<PlateLine>().SetMixedPlatesValue(minValue, maxValue);
         newLine.transform.SetParent(plateLinesContainer);
         lastPlateLineZPos += 2;
     }
+
+    private void HandleMixedLinesSpawnedCount()
+    {
+        currentMixedPlatesSpawned++;
+        if (currentMixedPlatesSpawned >= mixedPlatesSpawnRequires)
+        {
+            currentMixedPlatesSpawned = 0;
+            needSpawnMixedPlates = false;
+        }
+    }
+
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Z))
+    //     {
+    //         if (needSpawnMixedPlates)
+    //         {
+    //             SpawnMixedHorizontalLine(platesValues[currentPlateValueIndex - 1], platesValues[currentPlateValueIndex]);
+    //             HandleMixedLinesSpawnedCount();
+    //         }
+    //         else
+    //         {
+    //             SpawnHorizontalLine();
+    //         }
+    //     }
+    // }
+
 }
