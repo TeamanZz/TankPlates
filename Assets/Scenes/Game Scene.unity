@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9d2175e0637d6498cec133e3f31724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tankMovement: {fileID: 8409059581231278117}
 --- !u!1 &242110308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2513,7 +2514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8409059581231278115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -5}
+  m_LocalPosition: {x: 0, y: 1, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3587204979994879107}
@@ -2602,7 +2603,7 @@ MonoBehaviour:
   tankOrigin: {fileID: 242110309}
   shootPoint: {fileID: 521429675}
   projectilePrefab: {fileID: 3145273892152491633, guid: 751425ef676db2d408da2205b4d352f6, type: 3}
-  delayBetweenShot: 1
+  delayBetweenShot: 0.5
 --- !u!23 &8543712671447297369
 MeshRenderer:
   m_ObjectHideFlags: 0

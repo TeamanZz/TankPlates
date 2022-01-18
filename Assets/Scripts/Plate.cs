@@ -51,6 +51,7 @@ public class Plate : MonoBehaviour
         SetDefaultColor();
         ShakePlate();
         DisableText();
+        transform.parent.GetComponent<PlateLine>().DecreasePlatesCount();
         this.enabled = false;
         GetComponent<BoxCollider>().enabled = false;
     }

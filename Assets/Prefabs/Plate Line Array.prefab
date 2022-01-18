@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1225216569358319222}
   - component: {fileID: 6888067439492852932}
-  - component: {fileID: 101851344400965566}
   m_Layer: 0
   m_Name: Plate Line Array
   m_TagString: Untagged
@@ -59,19 +58,6 @@ MonoBehaviour:
   - {fileID: 7331429300273802992}
   - {fileID: 7140079075809663845}
   - {fileID: 8512812944271344805}
---- !u!65 &101851344400965566
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225216569358319221}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 15, y: 2, z: 2}
-  m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!1001 &2757926188376993875
 PrefabInstance:
   m_ObjectHideFlags: 0
