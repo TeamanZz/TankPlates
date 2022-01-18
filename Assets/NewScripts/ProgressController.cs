@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class ProgressController : MonoBehaviour
 {
-    public static ProgressController progressController;
+    public static ProgressController Instance;
     public int ourMoney = 30;
     public TextMeshProUGUI ourMoneyText;
 
@@ -17,7 +17,7 @@ public class ProgressController : MonoBehaviour
     public TextMeshProUGUI damageCostText;
     public TextMeshProUGUI damageLvlText;
 
-    [Header("Income")] 
+    [Header("Income")]
     public int incomeUpgradeCost = 10;
     public int incomeLvl = 1;
 
@@ -37,7 +37,7 @@ public class ProgressController : MonoBehaviour
 
     public void Awake()
     {
-        progressController = this;
+        Instance = this;
         //ourMoney = PlayerPrefs.GetInt("OurMoney");
 
         //damageUpgradeCost = PlayerPrefs.GetInt("damageUpgradeCost");
@@ -48,13 +48,13 @@ public class ProgressController : MonoBehaviour
         ////  save data
 
         damageCostText.text = damageUpgradeCost.ToString();
-        damageLvlText.text = damageLvl.ToString();
+        damageLvlText.text = "LVL " + damageLvl.ToString();
 
         incomeCostText.text = incomeUpgradeCost.ToString();
-        incomeLvlText.text = incomeLvl.ToString();
+        incomeLvlText.text = "LVL " + incomeLvl.ToString();
 
         dispatchCostText.text = dispatchUprageCost.ToString();
-        dispatchLvlText.text = dispatchLvl.ToString();
+        dispatchLvlText.text = "LVL " + dispatchLvl.ToString();
 
 
         ourMoneyText.text = ourMoney.ToString();
@@ -78,7 +78,7 @@ public class ProgressController : MonoBehaviour
         damageLvl += 1;
         damageUpgradeCost += damagePriceIncrease;
 
-        damageLvlText.text = damageLvl.ToString();
+        damageLvlText.text = "LVL " + damageLvl.ToString();
         damageCostText.text = damageUpgradeCost.ToString();
 
         ourMoneyText.text = ourMoney.ToString();
@@ -98,7 +98,7 @@ public class ProgressController : MonoBehaviour
         incomeLvl += 1;
         incomeUpgradeCost += incomePriceIncrease;
 
-        incomeLvlText.text = incomeLvl.ToString();
+        incomeLvlText.text = "LVL " + incomeLvl.ToString();
         incomeCostText.text = incomeUpgradeCost.ToString();
 
         ourMoneyText.text = ourMoney.ToString();
@@ -117,7 +117,7 @@ public class ProgressController : MonoBehaviour
         dispatchLvl += 1;
         dispatchUprageCost += dispatchPriceIncrease;
 
-        dispatchLvlText.text = dispatchLvl.ToString();
+        dispatchLvlText.text = "LVL " + dispatchLvl.ToString();
         dispatchCostText.text = dispatchUprageCost.ToString();
 
         ourMoneyText.text = ourMoney.ToString();
@@ -125,5 +125,4 @@ public class ProgressController : MonoBehaviour
         //PlayerPrefs.SetInt("incomeLvl", incomeLvl);
         //PlayerPrefs.SetInt("OurMoney", ourMoney);
     }
-
 }
