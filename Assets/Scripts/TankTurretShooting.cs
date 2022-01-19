@@ -19,6 +19,11 @@ public class TankTurretShooting : MonoBehaviour
         currentTimerValue = delayBetweenShot;
     }
 
+    public void DecreaseDelayBetweenShoot()
+    {
+        delayBetweenShot -= 0.01f;
+    }
+
     public void SetNewProjectileDamage(int value)
     {
         projectileDamage = value;

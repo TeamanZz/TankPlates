@@ -1248,6 +1248,7 @@ GameObject:
   - component: {fileID: 330015468}
   - component: {fileID: 330015467}
   - component: {fileID: 330015469}
+  - component: {fileID: 330015470}
   m_Layer: 5
   m_Name: Button Right
   m_TagString: Untagged
@@ -1372,6 +1373,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &330015470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330015465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1acf58a6aa67e4e813bd75fd87dde1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  button: {fileID: 330015469}
+  imagesList:
+  - {fileID: 330015467}
+  - {fileID: 1420566204}
+  - {fileID: 225051095}
+  - {fileID: 126073935}
+  - {fileID: 741980652}
+  - {fileID: 2016218548}
 --- !u!1 &380750493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,6 +1977,10 @@ MonoBehaviour:
   dispatchCostText: {fileID: 2035388724}
   dispatchLvlText: {fileID: 1082802093}
   tankTurret: {fileID: 8409059581231278119}
+  bottomButtons:
+  - {fileID: 1290677616}
+  - {fileID: 1428035080}
+  - {fileID: 330015470}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,6 +2748,7 @@ GameObject:
   - component: {fileID: 1290677614}
   - component: {fileID: 1290677613}
   - component: {fileID: 1290677615}
+  - component: {fileID: 1290677616}
   m_Layer: 5
   m_Name: Button Left
   m_TagString: Untagged
@@ -2846,6 +2873,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1290677616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290677611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1acf58a6aa67e4e813bd75fd87dde1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  button: {fileID: 1290677615}
+  imagesList:
+  - {fileID: 1290677613}
+  - {fileID: 4409695}
+  - {fileID: 1426892265}
+  - {fileID: 1990689729}
+  - {fileID: 1476135169}
+  - {fileID: 1401228304}
 --- !u!1 &1374253186
 GameObject:
   m_ObjectHideFlags: 0
@@ -3162,6 +3210,7 @@ GameObject:
   - component: {fileID: 1428035078}
   - component: {fileID: 1428035077}
   - component: {fileID: 1428035079}
+  - component: {fileID: 1428035080}
   m_Layer: 5
   m_Name: Button Middle
   m_TagString: Untagged
@@ -3286,6 +3335,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1428035080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428035075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1acf58a6aa67e4e813bd75fd87dde1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  button: {fileID: 1428035079}
+  imagesList:
+  - {fileID: 1428035077}
+  - {fileID: 542282953}
+  - {fileID: 271941382}
+  - {fileID: 15260023}
+  - {fileID: 1374253188}
+  - {fileID: 1860937731}
 --- !u!1 &1476135167
 GameObject:
   m_ObjectHideFlags: 0
@@ -14343,7 +14413,7 @@ MonoBehaviour:
   shootPoint: {fileID: 521429675}
   projectilePrefab: {fileID: 3145273892152491633, guid: 751425ef676db2d408da2205b4d352f6, type: 3}
   shootParticles: {fileID: 1573430751113452, guid: 2a466384f73923846862c9479ce61b37, type: 3}
-  delayBetweenShot: 0.5
+  delayBetweenShot: 1
   projectileDamage: 1
 --- !u!23 &8543712671447297369
 MeshRenderer:

@@ -38,6 +38,8 @@ public class ProgressController : MonoBehaviour
 
     public TankTurretShooting tankTurret;
 
+    public List<MainButton> bottomButtons = new List<MainButton>();
+
     public void Awake()
     {
         Instance = this;
@@ -48,19 +50,35 @@ public class ProgressController : MonoBehaviour
 
     private void InitializeCost()
     {
-        damageCostText.text = damageUpgradeCost.ToString();
-        damageLvlText.text = "LVL " + damageLvl.ToString();
-
-        incomeCostText.text = incomeUpgradeCost.ToString();
-        incomeLvlText.text = "LVL " + incomeLvl.ToString();
-
-        dispatchCostText.text = dispatchUprageCost.ToString();
-        dispatchLvlText.text = "LVL " + dispatchLvl.ToString();
+        UpdateDamage();
+        UpdateIncome();
+        UpdateDispatch();
     }
 
-    public void AddMoney(int addMoney)
+    private void UpdateDispatch()
     {
-        moneyCount += addMoney;
+        dispatchCostText.text = dispatchUprageCost.ToString();
+        dispatchLvlText.text = "LVL " + dispatchLvl.ToString();
+        bottomButtons[0].cost = dispatchUprageCost;
+    }
+
+    private void UpdateIncome()
+    {
+        incomeCostText.text = incomeUpgradeCost.ToString();
+        incomeLvlText.text = "LVL " + incomeLvl.ToString();
+        bottomButtons[2].cost = incomeUpgradeCost;
+    }
+
+    private void UpdateDamage()
+    {
+        damageCostText.text = damageUpgradeCost.ToString();
+        damageLvlText.text = "LVL " + damageLvl.ToString();
+        bottomButtons[1].cost = damageUpgradeCost;
+    }
+
+    public void IncreaseCurrency()
+    {
+        moneyCount += incomeLvl;
         moneyCountText.text = moneyCount.ToString();
     }
 
@@ -75,8 +93,7 @@ public class ProgressController : MonoBehaviour
         tankTurret.SetNewProjectileDamage(damageLvl);
         damageUpgradeCost += damagePriceIncrease;
 
-        damageLvlText.text = "LVL " + damageLvl.ToString();
-        damageCostText.text = damageUpgradeCost.ToString();
+        UpdateDamage();
 
         moneyCountText.text = moneyCount.ToString();
     }
@@ -91,24 +108,23 @@ public class ProgressController : MonoBehaviour
         incomeLvl += 1;
         incomeUpgradeCost += incomePriceIncrease;
 
-        incomeLvlText.text = "LVL " + incomeLvl.ToString();
-        incomeCostText.text = incomeUpgradeCost.ToString();
+        UpdateIncome();
 
         moneyCountText.text = moneyCount.ToString();
     }
 
     public void DispatchImprovement()
     {
-        if (moneyCount < dispatchUprageCost)
+        if (moneyCount < dispatchUprageCost && dispatchLvl < 60)
             return;
 
         moneyCount -= dispatchUprageCost;
 
         dispatchLvl += 1;
+        tankTurret.DecreaseDelayBetweenShoot();
         dispatchUprageCost += dispatchPriceIncrease;
 
-        dispatchLvlText.text = "LVL " + dispatchLvl.ToString();
-        dispatchCostText.text = dispatchUprageCost.ToString();
+        UpdateDispatch();
 
         moneyCountText.text = moneyCount.ToString();
     }
