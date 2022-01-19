@@ -26,21 +26,21 @@ public class Plate : MonoBehaviour
 
     public void SetNewNonZeroValue(int newValue = 1)
     {
-        // var num = Random.Range(0, 5);
-        // if (newValue > 6 && num == 0)
-        // {
-        //     Debug.Log("heh2");
+        var num = Random.Range(0, 5);
+        if (num == 0)
+        {
+            Debug.Log("heh2");
 
-        //     isReflectionPlate = true;
-        //     GetComponent<BoxCollider>().isTrigger = false;
-        //     var currentMaterial = meshRenderer.material;
-        //     meshRenderer.material = new Material(currentMaterial);
-        //     meshRenderer.material.color = Color.black;
+            isReflectionPlate = true;
+            GetComponent<BoxCollider>().isTrigger = false;
+            var currentMaterial = meshRenderer.material;
+            meshRenderer.material = new Material(currentMaterial);
+            meshRenderer.material.color = Color.black;
 
-        //     valueText.gameObject.SetActive(false);
+            valueText.gameObject.SetActive(false);
 
-        //     return;
-        // }
+            return;
+        }
 
         value = newValue;
         UpdateTextValue();
