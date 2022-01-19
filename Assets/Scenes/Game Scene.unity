@@ -305,7 +305,7 @@ Transform:
   - {fileID: 1841114416}
   - {fileID: 1555462390}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &126073933
 GameObject:
@@ -1889,7 +1889,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &688085640
 MonoBehaviour:
@@ -1906,9 +1906,25 @@ MonoBehaviour:
   platesColors:
   - {r: 0.023529412, g: 0.74509805, b: 0.11764706, a: 1}
   - {r: 0.8666667, g: 0.56078434, b: 0, a: 1}
-  - {r: 0.8666667, g: 0, b: 0.008577601, a: 1}
+  - {r: 0.16470589, g: 0.5764706, b: 0.81568635, a: 1}
+  - {r: 0.8156863, g: 0.16470589, b: 0.7711326, a: 1}
+  - {r: 0.75368935, g: 0.8156863, b: 0.16470589, a: 1}
+  - {r: 0.8156863, g: 0.16470589, b: 0.1827203, a: 1}
+  - {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  - {r: 0.16470589, g: 0.8156863, b: 0.6824837, a: 1}
+  - {r: 1, g: 0.89193785, b: 0.042452812, a: 1}
+  - {r: 0.59354484, g: 0.21586865, b: 0.9339623, a: 1}
   textColors:
   - {r: 0.58431375, g: 0.38039216, b: 0, a: 1}
+  - {r: 0.16470589, g: 0.5764706, b: 0.8156863, a: 1}
+  - {r: 0.8156863, g: 0.16470589, b: 0.77254903, a: 1}
+  - {r: 0.8666206, g: 0.9433962, b: 0.14684942, a: 1}
+  - {r: 0.8156863, g: 0.16470589, b: 0.18431373, a: 1}
+  - {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 1}
+  - {r: 0.16470589, g: 0.8156863, b: 0.68235296, a: 1}
+  - {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  - {r: 0.5921569, g: 0.21568628, b: 0.93333334, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &688085641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,6 +1937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d95178f8d9396743aadaa44fd57d1b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tankMovement: {fileID: 8409059581231278117}
   needSpawnMixedPlates: 0
   mixedPlatesSpawnRequires: 3
   currentMixedPlatesSpawned: 0
@@ -1928,10 +1945,7 @@ MonoBehaviour:
   startPlateLineZPos: -24
   plateLinePrefab: {fileID: 1225216569358319221, guid: 549ad0227675ed94b9d130306e3cdb96, type: 3}
   plateLinesContainer: {fileID: 1704160791}
-  currentPlateValueIndex: 0
-  platesValues: 01000000060000000c00000012000000180000001e000000
-  plateLinesList: []
-  tankMovement: {fileID: 8409059581231278117}
+  currentPlateValue: 100
 --- !u!114 &688085642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1959,10 +1973,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85a23ac916ed14408459e84418b032a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyCount: 30
+  moneyCount: 1000
   moneyCountText: {fileID: 1025752284}
   damageUpgradeCost: 10
   damageLvl: 1
+  damageIncreasesCounter: 0
   damagePriceIncrease: 15
   damageCostText: {fileID: 168017870}
   damageLvlText: {fileID: 164970336}
@@ -2734,7 +2749,7 @@ Transform:
   - {fileID: 967935339}
   - {fileID: 1907587714}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1290677611
 GameObject:
@@ -3676,7 +3691,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1841114415
 GameObject:
@@ -6613,7 +6628,7 @@ RectTransform:
   - {fileID: 380750494}
   - {fileID: 479256915}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -14362,8 +14377,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 3}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 2, y: 9.658572, z: 3}
+  m_Center: {x: 0, y: 4.829286, z: 0}
 --- !u!114 &8409059581231278117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14413,7 +14428,7 @@ MonoBehaviour:
   shootPoint: {fileID: 521429675}
   projectilePrefab: {fileID: 3145273892152491633, guid: 751425ef676db2d408da2205b4d352f6, type: 3}
   shootParticles: {fileID: 1573430751113452, guid: 2a466384f73923846862c9479ce61b37, type: 3}
-  delayBetweenShot: 1
+  delayBetweenShot: 0.4
   projectileDamage: 1
 --- !u!23 &8543712671447297369
 MeshRenderer:

@@ -79,14 +79,14 @@ public class TankMovement : MonoBehaviour
 
     private void MoveTankForward()
     {
-        Vector3 newPos = transform.position + new Vector3(0, 0, movementSpeed / 5 * Time.deltaTime);
+        Vector3 newPos = transform.position + new Vector3(0, 0, movementSpeed / 3 * Time.deltaTime);
         transform.position = newPos;
     }
 
     private void MoveCameraForward()
     {
         Vector3 currentCameraPos = Camera.main.transform.position;
-        Vector3 cameraNewPos = new Vector3(0, currentCameraPos.y, currentCameraPos.z + movementSpeed / 5 * Time.deltaTime);
+        Vector3 cameraNewPos = new Vector3(0, currentCameraPos.y, currentCameraPos.z + movementSpeed / 3 * Time.deltaTime);
         Camera.main.transform.position = cameraNewPos;
     }
 

@@ -10,7 +10,7 @@ public class TankTurretRotation : MonoBehaviour
 
     private int directionCoefficient = 1;
 
-    private void Update()
+    private void FixedUpdate()
     {
         RotateTurretAutomaticaly();
     }

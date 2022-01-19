@@ -8,7 +8,7 @@ public class Plate : MonoBehaviour
 {
     [SerializeField] private TextMeshPro valueText;
 
-    [SerializeField] private int value;
+    public int value;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private GameObject particles;
 
@@ -78,6 +78,8 @@ public class Plate : MonoBehaviour
         var currentMaterial = meshRenderer.material;
         meshRenderer.material = new Material(currentMaterial);
         meshRenderer.material.color = newColor;
+
+        valueText.color = ColorsHandler.Instance.GetTextColor(value);
     }
 
     private void SetDefaultColor()

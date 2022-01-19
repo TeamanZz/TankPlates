@@ -12,6 +12,7 @@ public class ProgressController : MonoBehaviour
     [Header("Damage settings")]
     public int damageUpgradeCost = 10;
     public int damageLvl = 1;
+    [SerializeField] private int damageIncreasesCounter = 0;
 
     public int damagePriceIncrease = 15;
 
@@ -92,6 +93,16 @@ public class ProgressController : MonoBehaviour
         damageLvl += 1;
         tankTurret.SetNewProjectileDamage(damageLvl);
         damageUpgradeCost += damagePriceIncrease;
+
+        damageIncreasesCounter++;
+
+        if (damageIncreasesCounter == 3)
+            PlatesSpawner.Instance.IncreasePlateValue();
+
+        if (damageIncreasesCounter >= 3)
+        {
+            damageIncreasesCounter = 0;
+        }
 
         UpdateDamage();
 

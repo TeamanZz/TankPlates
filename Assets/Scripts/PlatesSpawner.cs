@@ -6,6 +6,8 @@ public class PlatesSpawner : MonoBehaviour
 {
     public static PlatesSpawner Instance;
 
+    [SerializeField] private TankMovement tankMovement;
+    [Space]
     [SerializeField] private bool needSpawnMixedPlates;
     [SerializeField] private int mixedPlatesSpawnRequires;
     [SerializeField] private int currentMixedPlatesSpawned;
@@ -20,18 +22,39 @@ public class PlatesSpawner : MonoBehaviour
     [SerializeField] private Transform plateLinesContainer;
 
     [Space]
-    [SerializeField] private int currentPlateValueIndex;
-    [SerializeField] private List<int> platesValues = new List<int>();
+    [SerializeField] private int currentPlateValue = 1;
 
-    [SerializeField] private List<PlateLine> plateLinesList = new List<PlateLine>();
+    private List<PlateLine> plateLinesList = new List<PlateLine>();
 
-
-    [SerializeField] private TankMovement tankMovement;
     private void Awake()
     {
         Instance = this;
 
         lastPlateLineZPos = startPlateLineZPos;
+    }
+
+    public void SpawnLine()
+    {
+        if (needSpawnMixedPlates)
+        {
+            SpawnMixedHorizontalLine();
+            HandleMixedLinesSpawnedCount();
+        }
+        else
+        {
+            SpawnHorizontalLine();
+        }
+    }
+
+    public void IncreasePlateValue()
+    {
+        needSpawnMixedPlates = true;
+        if (currentPlateValue == 1)
+        {
+            currentPlateValue += 5;
+        }
+        else
+            currentPlateValue += 6;
     }
 
     public void RemoveElementFromArray(PlateLine line)
@@ -73,18 +96,18 @@ public class PlatesSpawner : MonoBehaviour
         Vector3 newLinePosition = new Vector3(0, 0, lastPlateLineZPos);
         var newLine = Instantiate(plateLinePrefab, newLinePosition, Quaternion.identity);
         var plateLineComponent = newLine.GetComponent<PlateLine>();
-        plateLineComponent.SetPlatesValue(platesValues[currentPlateValueIndex]);
+        plateLineComponent.SetPlatesValue(currentPlateValue);
         newLine.transform.SetParent(plateLinesContainer);
         lastPlateLineZPos += 2;
         plateLinesList.Add(plateLineComponent);
     }
 
-    public void SpawnMixedHorizontalLine(int minValue, int maxValue)
+    public void SpawnMixedHorizontalLine()
     {
         Vector3 newLinePosition = new Vector3(0, 0, lastPlateLineZPos);
         var newLine = Instantiate(plateLinePrefab, newLinePosition, Quaternion.identity);
         var plateLineComponent = newLine.GetComponent<PlateLine>();
-        plateLineComponent.SetMixedPlatesValue(minValue, maxValue);
+        plateLineComponent.SetMixedPlatesValue(currentPlateValue - 5, currentPlateValue);
         newLine.transform.SetParent(plateLinesContainer);
         lastPlateLineZPos += 2;
         plateLinesList.Add(plateLineComponent);
@@ -99,21 +122,4 @@ public class PlatesSpawner : MonoBehaviour
             needSpawnMixedPlates = false;
         }
     }
-
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Z))
-    //     {
-    //         if (needSpawnMixedPlates)
-    //         {
-    //             SpawnMixedHorizontalLine(platesValues[currentPlateValueIndex - 1], platesValues[currentPlateValueIndex]);
-    //             HandleMixedLinesSpawnedCount();
-    //         }
-    //         else
-    //         {
-    //             SpawnHorizontalLine();
-    //         }
-    //     }
-    // }
-
 }

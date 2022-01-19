@@ -11,7 +11,7 @@ public class PlatesSpawnCollider : MonoBehaviour
         PlateLine plateLine;
         if (other.TryGetComponent<PlateLine>(out plateLine))
         {
-            platesSpawner.SpawnHorizontalLine();
+            platesSpawner.SpawnLine();
         }
     }
 }

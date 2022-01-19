@@ -28,9 +28,12 @@ public class TankProjectile : MonoBehaviour
             if (!plate.enabled)
                 return;
 
-            plate.TakeDamage(1);
+            var localDamage = damage;
 
-            damage--;
+            damage -= plate.value;
+            if (localDamage > 0)
+                plate.TakeDamage(localDamage);
+
             if (damage <= 0)
                 Destroy(gameObject);
         }

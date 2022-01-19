@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,19 +15,39 @@ public class ColorsHandler : MonoBehaviour
         Instance = this;
     }
 
-    public Color GetNewPlateColor(int state)
-    {
-        return platesColors[state];
-    }
+    // public Color GetNewPlateColor(int state)
+    // {
+    //     return platesColors[state];
+    // }
 
     public Color GetLerpedColor(int value)
     {
-        if (value >= 1 && value <= 6)
+        var truncNumber = Math.Truncate((double)(value / 6));
+        if (truncNumber <= 1)
+            truncNumber++;
+        if ((int)truncNumber >= platesColors.Count)
         {
-            float tVal = (float)value / 6;
-            return Color.Lerp(platesColors[1], platesColors[2], tVal);
+            return platesColors[UnityEngine.Random.Range(1, platesColors.Count)];
         }
-        return new Color();
+        else
+        {
+            return platesColors[(int)truncNumber];
+        }
+    }
+
+    public Color GetTextColor(int value)
+    {
+        var truncNumber = Math.Truncate((double)(value / 6));
+        if (truncNumber <= 1)
+            truncNumber++;
+        if ((int)truncNumber >= textColors.Count)
+        {
+            return textColors[UnityEngine.Random.Range(1, textColors.Count)];
+        }
+        else
+        {
+            return textColors[(int)truncNumber];
+        }
     }
 
     public Color GetDefaultColor()
