@@ -25,7 +25,7 @@ public class BossesSpawner : MonoBehaviour
     {
         lastSpawnedBoss = Instantiate(bossPrefabs[0], new Vector3(0, 2, PlatesSpawner.Instance.lastPlateLineZPos), Quaternion.Euler(0, 180, 0));
 
-        lastSpawnedBoss.GetComponent<BossTurret>().projectileDamage = ProgressController.Instance.damageLvl;
+        lastSpawnedBoss.GetComponent<BossTurret>().projectileDamage = Mathf.Abs((int)ProgressController.Instance.damageLvl / 1.5f);
         lastSpawnedBoss.GetComponent<BossTurret>().totalHp = ProgressController.Instance.damageLvl * 20;
     }
 }

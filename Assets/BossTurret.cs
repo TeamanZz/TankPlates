@@ -42,7 +42,7 @@ public class BossTurret : MonoBehaviour
         if (currentTimerValue <= 0)
         {
             var newBullet = Instantiate(projectilePrefab, shootPoint.position, transform.GetChild(1).rotation);
-            // var newParticles = Instantiate(shootParticles, shootPoint.position, transform.GetChild(1).localRotation);
+            var newParticles = Instantiate(shootParticles, shootPoint.position, transform.GetChild(1).localRotation);
             var forceVector = shootPoint.position - tankOrigin.position;
             newBullet.GetComponent<Rigidbody>().AddForce(forceVector.normalized * 5, ForceMode.Impulse);
             newBullet.GetComponent<BossTankProjectile>().damage = (int)projectileDamage;
