@@ -14425,8 +14425,8 @@ MonoBehaviour:
   tankOrigin: {fileID: 242110309}
   shootPoint: {fileID: 521429675}
   projectilePrefab: {fileID: 3145273892152491633, guid: 751425ef676db2d408da2205b4d352f6, type: 3}
-  shootParticles: {fileID: 1573430751113452, guid: 2a466384f73923846862c9479ce61b37, type: 3}
-  delayBetweenShot: 0.5
+  shootParticles: {fileID: 130848, guid: ae82cf24ee78ed14a8397befb652ca87, type: 3}
+  delayBetweenShot: 1
   projectileDamage: 1
 --- !u!23 &8543712671447297369
 MeshRenderer:

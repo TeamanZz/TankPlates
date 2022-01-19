@@ -77,7 +77,7 @@ public class TankMovement : MonoBehaviour
 
     private void MoveHorizontalAutomaticaly()
     {
-        Vector3 newPos = transform.position + new Vector3(movementSpeed * directionSign * Time.deltaTime, 0, 0);
+        Vector3 newPos = transform.position + new Vector3(movementSpeed / 2 * directionSign * Time.deltaTime, 0, 0);
         transform.position = new Vector3(Mathf.Clamp(newPos.x, leftEdge, rightEdge), newPos.y, newPos.z);
         if (transform.position.x >= rightEdge || transform.position.x <= leftEdge)
             directionSign *= -1;
@@ -85,21 +85,21 @@ public class TankMovement : MonoBehaviour
 
     private void MoveTankForward()
     {
-        Vector3 newPos = transform.position + new Vector3(0, 0, movementSpeed * Time.deltaTime);
+        Vector3 newPos = transform.position + new Vector3(0, 0, movementSpeed / 2 * Time.deltaTime);
         transform.position = newPos;
     }
 
     private void MoveCameraForward()
     {
         Vector3 currentCameraPos = Camera.main.transform.position;
-        Vector3 cameraNewPos = new Vector3(0, currentCameraPos.y, currentCameraPos.z + movementSpeed * Time.deltaTime);
+        Vector3 cameraNewPos = new Vector3(0, currentCameraPos.y, currentCameraPos.z + movementSpeed / 2 * Time.deltaTime);
         Camera.main.transform.position = cameraNewPos;
     }
 
     private void MoveReflectionWallsForward()
     {
         Vector3 wallsPosition = reflectWalls.transform.position;
-        Vector3 wallsNewPos = new Vector3(0, wallsPosition.y, wallsPosition.z + movementSpeed * Time.deltaTime);
+        Vector3 wallsNewPos = new Vector3(0, wallsPosition.y, wallsPosition.z + movementSpeed / 2 * Time.deltaTime);
         reflectWalls.transform.position = wallsNewPos;
     }
 }

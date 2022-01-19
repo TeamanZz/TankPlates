@@ -69,13 +69,12 @@ public class Plate : MonoBehaviour
     {
         if (isReflectionPlate)
             return;
-
+        ShakePlate();
         value = damageValue;
 
         UpdateTextValue();
         valueText.gameObject.SetActive(true);
         SetColorDependsOnValue();
-
     }
 
     private void UpdateTextValue()
