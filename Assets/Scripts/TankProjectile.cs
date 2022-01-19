@@ -11,6 +11,8 @@ public class TankProjectile : MonoBehaviour
 
     Vector3 velocity;
 
+    private bool canInteract = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,22 +27,48 @@ public class TankProjectile : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<Plate>(out plate))
         {
-            if (!plate.enabled)
+            if (plate.value <= 0)
                 return;
 
-            var localDamage = damage;
+            if (!canInteract)
+                return;
 
-            damage -= plate.value;
-            if (localDamage > 0)
-                plate.TakeDamage(localDamage);
+            var damageToProjectile = plate.value;
+
+            if (damage > 0)
+                plate.TakeDamage(damage);
+
+            Debug.Log(damageToProjectile);
+            damage -= damageToProjectile;
 
             if (damage <= 0)
+            {
+                canInteract = false;
                 Destroy(gameObject);
+            }
+
+        }
+
+        BossTurret bossTurret;
+        if (other.TryGetComponent<BossTurret>(out bossTurret))
+        {
+            var localDamage = damage;
+
+            if (localDamage > 0)
+                bossTurret.TakeDamage(localDamage, other.transform.position);
+
+            Destroy(gameObject);
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        Plate plate;
+        if (other.gameObject.TryGetComponent<Plate>(out plate))
+        {
+            ReflectFromPlate(other);
+        }
+
         if (other.gameObject.TryGetComponent<ReflectionSurface>(out surface))
         {
             Reflect(other);
@@ -59,5 +87,19 @@ public class TankProjectile : MonoBehaviour
                                         transform.localRotation.y,
                                         transform.localRotation.z,
                                         transform.localRotation.w * -1.0f);
+    }
+
+    private void ReflectFromPlate(Collision other)
+    {
+        Vector3 wallNormal = other.contacts[0].normal;
+        var dir = Vector3.Reflect(velocity, wallNormal).normalized;
+
+        rb.velocity = dir * 5;
+        transform.localRotation = new Quaternion(transform.localRotation.x * -1.0f,
+                                        transform.localRotation.y,
+                                        transform.localRotation.z,
+                                        transform.localRotation.w * -1.0f);
+        if (dir.z < 0)
+            transform.eulerAngles += new Vector3(0, 180, 0);
     }
 }

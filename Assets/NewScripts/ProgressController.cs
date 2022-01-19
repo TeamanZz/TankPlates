@@ -96,10 +96,13 @@ public class ProgressController : MonoBehaviour
 
         damageIncreasesCounter++;
 
-        if (damageIncreasesCounter == 3)
+        if (damageIncreasesCounter == 1 && BossesSpawner.Instance.lastSpawnedBoss == null)
+        {
+            BossesSpawner.Instance.SpawnBoss();
             PlatesSpawner.Instance.IncreasePlateValue();
+        }
 
-        if (damageIncreasesCounter >= 3)
+        if (damageIncreasesCounter >= 1)
         {
             damageIncreasesCounter = 0;
         }

@@ -47,7 +47,7 @@ public class TankMovement : MonoBehaviour
 
     public void CheckOnMoveForward(Vector3 nearestLinePos)
     {
-        if (Mathf.Abs(nearestLinePos.z - transform.position.z) > 10)
+        if ((Mathf.Abs(nearestLinePos.z - transform.position.z) > 10) && (BossesSpawner.Instance.lastSpawnedBoss == null || BossesSpawner.Instance.lastSpawnedBoss.activeSelf == false))
         {
             lastNearestLinePos = nearestLinePos;
             needMoveForward = true;
@@ -58,6 +58,12 @@ public class TankMovement : MonoBehaviour
     {
         if (Mathf.Abs(lastNearestLinePos.z - transform.position.z) <= 10)
         {
+            needMoveForward = false;
+        }
+
+        if (BossesSpawner.Instance.lastSpawnedBoss != null && Mathf.Abs(BossesSpawner.Instance.lastSpawnedBoss.transform.position.z - transform.position.z) <= 10)
+        {
+            BossesSpawner.Instance.lastSpawnedBoss.SetActive(true);
             needMoveForward = false;
         }
     }
@@ -79,21 +85,21 @@ public class TankMovement : MonoBehaviour
 
     private void MoveTankForward()
     {
-        Vector3 newPos = transform.position + new Vector3(0, 0, movementSpeed / 3 * Time.deltaTime);
+        Vector3 newPos = transform.position + new Vector3(0, 0, movementSpeed * Time.deltaTime);
         transform.position = newPos;
     }
 
     private void MoveCameraForward()
     {
         Vector3 currentCameraPos = Camera.main.transform.position;
-        Vector3 cameraNewPos = new Vector3(0, currentCameraPos.y, currentCameraPos.z + movementSpeed / 3 * Time.deltaTime);
+        Vector3 cameraNewPos = new Vector3(0, currentCameraPos.y, currentCameraPos.z + movementSpeed * Time.deltaTime);
         Camera.main.transform.position = cameraNewPos;
     }
 
     private void MoveReflectionWallsForward()
     {
         Vector3 wallsPosition = reflectWalls.transform.position;
-        Vector3 wallsNewPos = new Vector3(0, wallsPosition.y, wallsPosition.z + movementSpeed / 5 * Time.deltaTime);
+        Vector3 wallsNewPos = new Vector3(0, wallsPosition.y, wallsPosition.z + movementSpeed * Time.deltaTime);
         reflectWalls.transform.position = wallsNewPos;
     }
 }

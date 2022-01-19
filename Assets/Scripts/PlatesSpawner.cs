@@ -15,7 +15,7 @@ public class PlatesSpawner : MonoBehaviour
     [Space]
     [SerializeField] private int startPlateLinesCount;
     [SerializeField] private float startPlateLineZPos;
-    private float lastPlateLineZPos;
+    [HideInInspector] public float lastPlateLineZPos;
 
     [Space]
     [SerializeField] private GameObject plateLinePrefab;

@@ -12,17 +12,36 @@ public class Plate : MonoBehaviour
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private GameObject particles;
 
+    public bool isReflectionPlate;
+
+
     public void SetPlateAsEmptyOnStart()
     {
         value = 0;
         SetDefaultColor();
         DisableText();
-        this.enabled = false;
-        GetComponent<BoxCollider>().enabled = false;
+        // this.enabled = false;
+        // GetComponent<BoxCollider>().enabled = false;
     }
 
     public void SetNewNonZeroValue(int newValue = 1)
     {
+        // var num = Random.Range(0, 5);
+        // if (newValue > 6 && num == 0)
+        // {
+        //     Debug.Log("heh2");
+
+        //     isReflectionPlate = true;
+        //     GetComponent<BoxCollider>().isTrigger = false;
+        //     var currentMaterial = meshRenderer.material;
+        //     meshRenderer.material = new Material(currentMaterial);
+        //     meshRenderer.material.color = Color.black;
+
+        //     valueText.gameObject.SetActive(false);
+
+        //     return;
+        // }
+
         value = newValue;
         UpdateTextValue();
         SetColorDependsOnValue();
@@ -30,6 +49,12 @@ public class Plate : MonoBehaviour
 
     public void TakeDamage(int damageValue)
     {
+        if (isReflectionPlate)
+            return;
+
+        if (value <= 0)
+            return;
+
         value -= damageValue;
         if (CheckOnZeroValue())
             KillPlate();
@@ -38,6 +63,19 @@ public class Plate : MonoBehaviour
             UpdateTextValue();
             SetColorDependsOnValue();
         }
+    }
+
+    public void RestoreValue(int damageValue)
+    {
+        if (isReflectionPlate)
+            return;
+
+        value = damageValue;
+
+        UpdateTextValue();
+        valueText.gameObject.SetActive(true);
+        SetColorDependsOnValue();
+
     }
 
     private void UpdateTextValue()
@@ -53,8 +91,8 @@ public class Plate : MonoBehaviour
         DisableText();
         ProgressController.Instance.IncreaseCurrency();
         transform.parent.GetComponent<PlateLine>().DecreasePlatesCount();
-        GetComponent<BoxCollider>().enabled = false;
-        this.enabled = false;
+        // GetComponent<BoxCollider>().enabled = false;
+        // this.enabled = false;
     }
 
     private bool CheckOnZeroValue()

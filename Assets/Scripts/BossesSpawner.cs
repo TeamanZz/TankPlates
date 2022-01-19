@@ -6,16 +6,26 @@ public class BossesSpawner : MonoBehaviour
 {
     public static BossesSpawner Instance;
 
+    public GameObject lastSpawnedBoss;
+
     private void Awake()
     {
         Instance = this;
     }
 
-    [SerializeField] private float tankPower;
+
     [SerializeField] private List<GameObject> bossPrefabs = new List<GameObject>();
 
     public void CheckOnBossSpawn(float lastPlateLineZPos)
     {
         var newTank = Instantiate(bossPrefabs[0], new Vector3(0, 2, lastPlateLineZPos), Quaternion.identity);
+    }
+
+    public void SpawnBoss()
+    {
+        lastSpawnedBoss = Instantiate(bossPrefabs[0], new Vector3(0, 2, PlatesSpawner.Instance.lastPlateLineZPos), Quaternion.Euler(0, 180, 0));
+
+        lastSpawnedBoss.GetComponent<BossTurret>().projectileDamage = ProgressController.Instance.damageLvl * 2;
+        lastSpawnedBoss.GetComponent<BossTurret>().totalHp = ProgressController.Instance.damageLvl * 25;
     }
 }

@@ -92,9 +92,9 @@ GameObject:
   - component: {fileID: 1663768865325696952}
   - component: {fileID: 1308661822755242584}
   - component: {fileID: 3145273892152491634}
-  - component: {fileID: 1602242523948309744}
+  - component: {fileID: 8487486456682955278}
   m_Layer: 6
-  m_Name: Rocket Projectile
+  m_Name: BossRocket Projectile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.35, y: 3.6729527, z: 1.2985933}
   m_Center: {x: 0, y: -1.5093145, z: 0.12}
---- !u!114 &1602242523948309744
+--- !u!114 &8487486456682955278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,10 +154,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3145273892152491633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a57baf86ed5ff84babcdc6c22bdf8ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 4197c755a010020439a673e68f35aed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
 --- !u!1 &3217126206771424032
 GameObject:
   m_ObjectHideFlags: 0
