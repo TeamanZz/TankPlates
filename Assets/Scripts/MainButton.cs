@@ -6,11 +6,22 @@ using UnityEngine.UI;
 public class MainButton : MonoBehaviour
 {
     public int cost;
+    private Animator animator;
 
     [SerializeField] private Button button;
     [SerializeField] private List<Image> imagesList = new List<Image>();
 
     private bool clickable = true;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public void PlayButtonAnimation()
+    {
+        animator.Play("Main Button Animation", 0, 0);
+    }
 
     void FixedUpdate()
     {
