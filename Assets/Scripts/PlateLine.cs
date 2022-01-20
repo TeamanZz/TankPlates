@@ -13,7 +13,13 @@ public class PlateLine : MonoBehaviour
         platesCount--;
 
         if (platesCount <= 0)
+        {
+            for (int i = 0; i < platesList.Count; i++)
+            {
+                platesList[i].RemoveReflectBehaivor();
+            }
             PlatesSpawner.Instance.RemoveElementFromArray(this);
+        }
     }
 
     public void SetPlatesValue(int value = 0)

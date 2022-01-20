@@ -7,11 +7,17 @@ using DG.Tweening;
 public class Plate : MonoBehaviour
 {
     public int value;
+    public int reflectionPlateChance;
+    public int explosionPlateChance;
+    public bool isExplosivePlate;
     public bool isReflectionPlate;
+    public bool wasExploded;
+    public bool wasKilled;
 
     [SerializeField] private TextMeshPro valueText;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private GameObject particles;
+    [SerializeField] private GameObject explodeImage;
 
     public void SetPlateAsEmptyOnStart()
     {
@@ -20,19 +26,30 @@ public class Plate : MonoBehaviour
         DisableText();
     }
 
+    public void RemoveReflectBehaivor()
+    {
+        if (isReflectionPlate)
+        {
+            isReflectionPlate = false;
+            GetComponent<BoxCollider>().isTrigger = true;
+            SetPlateAsEmptyOnStart();
+            var newParticles = Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
+        }
+    }
+
     public void SetNewNonZeroValue(int newValue = 1)
     {
-        var num = Random.Range(0, 80);
+        var num = Random.Range(0, reflectionPlateChance);
         value = newValue;
 
-        if (value > 6 && num == 0)
+        if (num == 0)
         {
             isReflectionPlate = true;
             GetComponent<BoxCollider>().isTrigger = false;
             var currentMaterial = meshRenderer.material;
             meshRenderer.material = new Material(currentMaterial);
             meshRenderer.material.color = Color.black;
-
+            transform.parent.GetComponent<PlateLine>().DecreasePlatesCount();
             valueText.gameObject.SetActive(false);
 
             return;
@@ -40,6 +57,16 @@ public class Plate : MonoBehaviour
 
         UpdateTextValue();
         SetColorDependsOnValue();
+
+        var num2 = Random.Range(0, explosionPlateChance);
+        value = newValue;
+
+        if (num2 == 0)
+        {
+            isExplosivePlate = true;
+            explodeImage.SetActive(true);
+            DisableText();
+        }
     }
 
     public void TakeDamage(int damageValue)
@@ -52,7 +79,12 @@ public class Plate : MonoBehaviour
 
         value -= damageValue;
         if (CheckOnZeroValue())
-            KillPlate();
+        {
+            if (isExplosivePlate)
+                ExplodePlate();
+            else
+                KillPlate();
+        }
         else
         {
             UpdateTextValue();
@@ -64,6 +96,7 @@ public class Plate : MonoBehaviour
     {
         if (isReflectionPlate)
             return;
+        wasKilled = false;
         ShakePlate();
         value = damageValue;
 
@@ -79,12 +112,52 @@ public class Plate : MonoBehaviour
 
     private void KillPlate()
     {
+        if (wasKilled)
+            return;
+        value = 0;
+        wasKilled = true;
+        GetComponent<BoxCollider>().isTrigger = true;
         var newParticles = Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
         SetDefaultColor();
         ShakePlate();
         DisableText();
         ProgressController.Instance.IncreaseCurrency();
-        transform.parent.GetComponent<PlateLine>().DecreasePlatesCount();
+        if (!isReflectionPlate)
+            transform.parent.GetComponent<PlateLine>().DecreasePlatesCount();
+        isReflectionPlate = false;
+    }
+
+    private void ExplodePlate()
+    {
+        if (wasExploded)
+            return;
+        wasExploded = true;
+        value = 0;
+        var newParticles = Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
+        SetDefaultColor();
+        ShakePlate();
+        DisableText();
+        ProgressController.Instance.IncreaseCurrency();
+        if (!isReflectionPlate)
+            transform.parent.GetComponent<PlateLine>().DecreasePlatesCount();
+        explodeImage.SetActive(false);
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3);
+        foreach (var hitCollider in hitColliders)
+        {
+            Plate plate;
+            if (hitCollider.TryGetComponent<Plate>(out plate))
+            {
+
+                if (!plate.isExplosivePlate)
+                    plate.KillPlate();
+                else
+                {
+                    if (!plate.wasExploded)
+                        plate.ExplodePlate();
+                }
+            }
+        }
     }
 
     private bool CheckOnZeroValue()

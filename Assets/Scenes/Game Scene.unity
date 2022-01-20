@@ -2036,7 +2036,7 @@ MonoBehaviour:
   lastPlateLineZPos: 0
   plateLinePrefab: {fileID: 1225216569358319221, guid: 549ad0227675ed94b9d130306e3cdb96, type: 3}
   plateLinesContainer: {fileID: 1704160791}
-  currentPlateValue: 12
+  currentPlateValue: 1
 --- !u!114 &688085642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2083,17 +2083,17 @@ MonoBehaviour:
   damageUpgradeCost: 10
   damageLvl: 1
   damageIncreasesCounter: 0
-  damagePriceIncrease: 15
+  damagePriceIncrease: 12
   damageCostText: {fileID: 168017870}
   damageLvlText: {fileID: 164970336}
   incomeUpgradeCost: 10
   incomeLvl: 1
-  incomePriceIncrease: 15
+  incomePriceIncrease: 12
   incomeCostText: {fileID: 294714823}
   incomeLvlText: {fileID: 296113292}
   dispatchUprageCost: 10
   dispatchLvl: 1
-  dispatchPriceIncrease: 15
+  dispatchPriceIncrease: 12
   dispatchCostText: {fileID: 2035388724}
   dispatchLvlText: {fileID: 1082802093}
   tankTurret: {fileID: 8409059581231278119}
@@ -10821,7 +10821,7 @@ MonoBehaviour:
   shootPoint: {fileID: 521429675}
   projectilePrefab: {fileID: 3145273892152491633, guid: 751425ef676db2d408da2205b4d352f6, type: 3}
   shootParticles: {fileID: 130848, guid: ae82cf24ee78ed14a8397befb652ca87, type: 3}
-  delayBetweenShot: 1
+  delayBetweenShot: 0.6
   projectileDamage: 1
 --- !u!23 &8543712671447297369
 MeshRenderer:

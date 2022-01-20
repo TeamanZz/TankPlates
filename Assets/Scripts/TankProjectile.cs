@@ -82,7 +82,7 @@ public class TankProjectile : MonoBehaviour
         Vector3 wallNormal = other.contacts[0].normal;
         var dir = Vector3.Reflect(velocity, wallNormal).normalized;
 
-        rb.velocity = dir * 5;
+        rb.velocity = dir * 8;
         float arrowAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(arrowAngle, Vector3.up);
         transform.localRotation = new Quaternion(transform.localRotation.x * -1.0f,
@@ -96,7 +96,7 @@ public class TankProjectile : MonoBehaviour
         Vector3 wallNormal = other.contacts[0].normal;
         var dir = Vector3.Reflect(velocity, wallNormal).normalized;
 
-        rb.velocity = dir * 5;
+        rb.velocity = dir * 8;
         transform.localRotation = new Quaternion(transform.localRotation.x * -1.0f,
                                         transform.localRotation.y,
                                         transform.localRotation.z,
