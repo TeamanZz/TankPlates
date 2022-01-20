@@ -46,7 +46,7 @@ public class TankMovement : MonoBehaviour
             needMoveForward = false;
         }
 
-        if (BossesSpawner.Instance.lastSpawnedBoss != null && Mathf.Abs(BossesSpawner.Instance.lastSpawnedBoss.transform.position.z - transform.position.z) <= 10)
+        if (BossesSpawner.Instance.lastSpawnedBoss != null && Mathf.Abs(BossesSpawner.Instance.lastSpawnedBoss.transform.position.z - transform.position.z) <= 12)
         {
             BossesSpawner.Instance.lastSpawnedBoss.SetActive(true);
             needMoveForward = false;
