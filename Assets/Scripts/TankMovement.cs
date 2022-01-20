@@ -7,7 +7,7 @@ public class TankMovement : MonoBehaviour
     public bool needMoveForward;
 
     [SerializeField] private GameObject reflectWalls;
-    [SerializeField] private bool canMoveAutomaticaly;
+    public bool canMoveAutomaticaly;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float leftEdge;
     [SerializeField] private float rightEdge;
@@ -28,21 +28,6 @@ public class TankMovement : MonoBehaviour
 
         if (canMoveAutomaticaly)
             MoveHorizontalAutomaticaly();
-    }
-
-    private void OnMouseDown()
-    {
-        canMoveAutomaticaly = false;
-    }
-
-    private void OnMouseUp()
-    {
-        canMoveAutomaticaly = true;
-    }
-
-    private void OnMouseDrag()
-    {
-        MoveHorizontalManually();
     }
 
     public void CheckOnMoveForward(Vector3 nearestLinePos)
@@ -66,13 +51,6 @@ public class TankMovement : MonoBehaviour
             BossesSpawner.Instance.lastSpawnedBoss.SetActive(true);
             needMoveForward = false;
         }
-    }
-
-    private void MoveHorizontalManually()
-    {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var newCubePosition = new Vector3(mousePos.x, transform.position.y, transform.position.z);
-        transform.position = new Vector3(Mathf.Clamp(newCubePosition.x, leftEdge, rightEdge), transform.position.y, transform.position.z);
     }
 
     private void MoveHorizontalAutomaticaly()

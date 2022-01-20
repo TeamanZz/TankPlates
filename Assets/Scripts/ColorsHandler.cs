@@ -15,24 +15,17 @@ public class ColorsHandler : MonoBehaviour
         Instance = this;
     }
 
-    // public Color GetNewPlateColor(int state)
-    // {
-    //     return platesColors[state];
-    // }
-
     public Color GetLerpedColor(int value)
     {
-        var truncNumber = Math.Truncate((double)(value / 6));
-        if (truncNumber <= 1)
-            truncNumber++;
-        if ((int)truncNumber >= platesColors.Count)
-        {
+        var truncatedNumber = Math.Truncate((double)(value / 6));
+
+        if (truncatedNumber <= 1)
+            truncatedNumber++;
+
+        if ((int)truncatedNumber >= platesColors.Count)
             return platesColors[UnityEngine.Random.Range(1, platesColors.Count)];
-        }
         else
-        {
-            return platesColors[(int)truncNumber];
-        }
+            return platesColors[(int)truncatedNumber];
     }
 
     public Color GetTextColor(int value)

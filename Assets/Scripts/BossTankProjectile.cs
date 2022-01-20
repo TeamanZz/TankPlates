@@ -10,6 +10,7 @@ public class BossTankProjectile : MonoBehaviour
     private Rigidbody rb;
 
     Vector3 velocity;
+    Vector3 prvPos;
 
     private void Awake()
     {
@@ -19,6 +20,9 @@ public class BossTankProjectile : MonoBehaviour
     private void FixedUpdate()
     {
         velocity = rb.velocity;
+        if (!Mathf.Approximately(Vector3.Angle(rb.velocity, transform.forward), 0)) transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
+        if (prvPos == transform.position) Destroy(gameObject);
+        prvPos = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)

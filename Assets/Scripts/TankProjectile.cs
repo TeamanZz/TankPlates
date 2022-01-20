@@ -10,6 +10,7 @@ public class TankProjectile : MonoBehaviour
     private Rigidbody rb;
 
     Vector3 velocity;
+    Vector3 prvPos;
 
     private bool canInteract = true;
 
@@ -21,6 +22,9 @@ public class TankProjectile : MonoBehaviour
     private void FixedUpdate()
     {
         velocity = rb.velocity;
+        if (!Mathf.Approximately(Vector3.Angle(rb.velocity, transform.forward), 0)) transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
+        if (prvPos == transform.position) Destroy(gameObject);
+        prvPos = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,7 +42,6 @@ public class TankProjectile : MonoBehaviour
             if (damage > 0)
                 plate.TakeDamage(damage);
 
-            Debug.Log(damageToProjectile);
             damage -= damageToProjectile;
 
             if (damage <= 0)
@@ -46,7 +49,6 @@ public class TankProjectile : MonoBehaviour
                 canInteract = false;
                 Destroy(gameObject);
             }
-
         }
 
         BossTurret bossTurret;
