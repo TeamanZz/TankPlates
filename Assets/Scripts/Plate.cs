@@ -42,7 +42,7 @@ public class Plate : MonoBehaviour
         var num = Random.Range(0, reflectionPlateChance);
         value = newValue;
 
-        if (num == 0)
+        if (value >= 6 && num == 0)
         {
             isReflectionPlate = true;
             GetComponent<BoxCollider>().isTrigger = false;
@@ -61,7 +61,7 @@ public class Plate : MonoBehaviour
         var num2 = Random.Range(0, explosionPlateChance);
         value = newValue;
 
-        if (num2 == 0)
+        if (value >= 12 && num2 == 0)
         {
             isExplosivePlate = true;
             explodeImage.SetActive(true);
