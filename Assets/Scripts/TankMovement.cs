@@ -30,19 +30,26 @@ public class TankMovement : MonoBehaviour
             MoveHorizontalAutomaticaly();
     }
 
+    public float distanceToTank;
     private void OnMouseDown()
     {
         canMoveAutomaticaly = false;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        distanceToTank = mousePos.x - transform.position.x; 
+        Debug.Log("Down");
     }
 
     private void OnMouseUp()
     {
+        distanceToTank = 0;
         canMoveAutomaticaly = true;
     }
 
     private void OnMouseDrag()
     {
         MoveHorizontalManually();
+        //Debug.Log("Up");
     }
 
     public void CheckOnMoveForward(Vector3 nearestLinePos)
@@ -70,9 +77,17 @@ public class TankMovement : MonoBehaviour
 
     private void MoveHorizontalManually()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var newCubePosition = new Vector3(mousePos.x, transform.position.y, transform.position.z);
+        //var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //var newCubePosition = new Vector3(mousePos.x, transform.position.y, transform.position.z);
+        //transform.position = new Vector3(Mathf.Clamp(newCubePosition.x, leftEdge, rightEdge), transform.position.y, transform.position.z);
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Debug.DrawLine(transform.position, mousePos, Color.red); 
+        Vector3 newCubePosition = new Vector3(mousePos.x - distanceToTank, transform.position.y, transform.position.z);
+
         transform.position = new Vector3(Mathf.Clamp(newCubePosition.x, leftEdge, rightEdge), transform.position.y, transform.position.z);
+
     }
 
     private void MoveHorizontalAutomaticaly()
