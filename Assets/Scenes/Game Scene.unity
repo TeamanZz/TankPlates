@@ -1101,6 +1101,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1841114417}
+        m_TargetAssemblyTypeName: SFX, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &330015470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3173,6 +3185,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1841114417}
+        m_TargetAssemblyTypeName: SFX, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1290677616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3560,6 +3584,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1841114417}
+        m_TargetAssemblyTypeName: SFX, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1428035080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3764,7 +3800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359dae4e433594940b24e4bcbb81c24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songs: []
+  songs:
+  - {fileID: 8300000, guid: 3c8a4d48dd597f64e86c44fa429c1001, type: 3}
 --- !u!82 &1555462392
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3777,7 +3814,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.802
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4010,7 +4047,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6dfb267b23c1e4a8f09e00c967ebf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundsList: []
+  soundsList:
+  - {fileID: 8300000, guid: 08efc6ece5403844fbf1b465f3e60602, type: 3}
+  - {fileID: 8300000, guid: bbea8c44d448ee246909fc743f96e398, type: 3}
+  - {fileID: 8300000, guid: cbf34b89fa3baa44b868982d0197c69f, type: 3}
+  - {fileID: 8300000, guid: 14ae8917d0f3ddf469e70994cb653497, type: 3}
+  - {fileID: 8300000, guid: 8faf3c520129ea249895a641ad2a7a84, type: 3}
+  - {fileID: 8300000, guid: f281a8db0729ae0469b9cd4d8949c9d8, type: 3}
+  - {fileID: 8300000, guid: b988234ca25a521439d2d2691b336ead, type: 3}
+  - {fileID: 8300000, guid: c3576ddd5c08bc647abb4f9680585f54, type: 3}
+  - {fileID: 8300000, guid: c3576ddd5c08bc647abb4f9680585f54, type: 3}
+  soundsBlockDestroyList:
+  - {fileID: 8300000, guid: 7e42c6866a5222f4eb1ed93a98a33e65, type: 3}
+  - {fileID: 8300000, guid: edecfa7cb53633049a88bbeab6082621, type: 3}
+  - {fileID: 8300000, guid: 552dfd3168e667e488bd220a3acbd171, type: 3}
 --- !u!82 &1841114418
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10917,7 +10967,7 @@ MonoBehaviour:
   shootPoint: {fileID: 521429675}
   projectilePrefab: {fileID: 3145273892152491633, guid: 751425ef676db2d408da2205b4d352f6, type: 3}
   shootParticles: {fileID: 130848, guid: ae82cf24ee78ed14a8397befb652ca87, type: 3}
-  delayBetweenShot: 0.6
+  delayBetweenShot: 0.7
   projectileDamage: 1
 --- !u!23 &8543712671447297369
 MeshRenderer:

@@ -343,8 +343,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  reflectionPlateChance: 65
-  explosionPlateChance: 50
+  reflectionPlateChance: 75
+  explosionPlateChance: 35
   isExplosivePlate: 0
   isReflectionPlate: 0
   wasExploded: 0

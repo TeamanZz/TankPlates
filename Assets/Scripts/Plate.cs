@@ -78,6 +78,12 @@ public class Plate : MonoBehaviour
             return;
 
         value -= damageValue;
+
+        if (!isExplosivePlate && value != 0)
+        {
+            SFX.Instance.PlaySound(0);
+        }
+
         if (CheckOnZeroValue())
         {
             if (isExplosivePlate)
@@ -87,6 +93,7 @@ public class Plate : MonoBehaviour
         }
         else
         {
+
             UpdateTextValue();
             SetColorDependsOnValue();
         }
@@ -119,6 +126,7 @@ public class Plate : MonoBehaviour
         GetComponent<BoxCollider>().isTrigger = true;
         var newParticles = Instantiate(particles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity, transform.parent.parent);
         SetDefaultColor();
+        SFX.Instance.PlayPlateDestroySound();
         ShakePlate();
         DisableText();
         ProgressController.Instance.IncreaseCurrency();
@@ -141,7 +149,7 @@ public class Plate : MonoBehaviour
         if (!isReflectionPlate)
             transform.parent.GetComponent<PlateLine>().DecreasePlatesCount();
         explodeImage.SetActive(false);
-
+        SFX.Instance.PlaySound(1);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3);
         foreach (var hitCollider in hitColliders)
         {

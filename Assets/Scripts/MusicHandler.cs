@@ -15,7 +15,7 @@ public class MusicHandler : MonoBehaviour
 
     void Start()
     {
-        // StartCoroutine(IEPlayRandomSong());
+        StartCoroutine(IEPlayRandomSong());
     }
 
     private IEnumerator IEPlayRandomSong()

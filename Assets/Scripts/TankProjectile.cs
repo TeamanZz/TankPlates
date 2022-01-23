@@ -49,6 +49,7 @@ public class TankProjectile : MonoBehaviour
                 canInteract = false;
                 Destroy(gameObject);
             }
+
         }
 
         BossTurret bossTurret;
@@ -59,6 +60,7 @@ public class TankProjectile : MonoBehaviour
             if (localDamage > 0)
                 bossTurret.TakeDamage(localDamage, other.transform.position);
 
+            SFX.Instance.PlaySound(6);
             Destroy(gameObject);
         }
     }
@@ -69,11 +71,14 @@ public class TankProjectile : MonoBehaviour
         if (other.gameObject.TryGetComponent<Plate>(out plate))
         {
             ReflectFromPlate(other);
+            SFX.Instance.PlaySound(5);
+
         }
 
         if (other.gameObject.TryGetComponent<ReflectionSurface>(out surface))
         {
             Reflect(other);
+            SFX.Instance.PlaySound(5);
         }
     }
 

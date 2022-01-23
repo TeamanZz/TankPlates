@@ -33,7 +33,10 @@ public class BossTurret : MonoBehaviour
         currentHp -= value;
         hpBar.fillAmount = (float)currentHp / (float)totalHp;
         if (currentHp <= 0)
+        {
+            SFX.Instance.PlaySound(7);
             Destroy(gameObject);
+        }
     }
 
     private void Update()
