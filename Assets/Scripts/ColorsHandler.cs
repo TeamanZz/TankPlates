@@ -31,9 +31,6 @@ public class ColorsHandler : MonoBehaviour
         float maxValue = (float)(truncatedNumber + 1) * 6;
 
         var tval = ((float)value - minValue) / (maxValue - minValue);
-        Debug.Log(truncatedNumber);
-        Debug.Log(truncatedNumber + 1);
-        Debug.Log("==============");
         Color lerpedColor = Color.Lerp(platesColors[truncatedNumber], platesColors[truncatedNumber + 1], tval);
 
         return lerpedColor;
@@ -41,10 +38,6 @@ public class ColorsHandler : MonoBehaviour
 
     private bool NeedSpawnRandomColorPlate(double truncatedNumber)
     {
-        // Debug.Log("trunc" + truncatedNumber);
-        // Debug.Log("colorsCount" + platesColors.Count);
-        // Debug.Log("======================");
-        // Debug.Log((int)truncatedNumber + 1 >= platesColors.Count);
         return (int)truncatedNumber + 1 >= platesColors.Count;
     }
 

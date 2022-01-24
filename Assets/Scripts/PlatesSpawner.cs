@@ -31,6 +31,15 @@ public class PlatesSpawner : MonoBehaviour
         Instance = this;
 
         lastPlateLineZPos = startPlateLineZPos;
+
+        currentPlateValue = PlayerPrefs.GetInt("CurrentPlateValue", 1);
+        if (currentPlateValue != 1)
+        {
+            if (currentPlateValue == 6)
+                currentPlateValue -= 5;
+            else
+                currentPlateValue -= 6;
+        }
     }
 
     public void SpawnLine()
@@ -55,6 +64,8 @@ public class PlatesSpawner : MonoBehaviour
         }
         else
             currentPlateValue += 6;
+
+        PlayerPrefs.SetInt("CurrentPlateValue", currentPlateValue);
     }
 
     public void RemoveElementFromArray(PlateLine line)

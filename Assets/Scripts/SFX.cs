@@ -24,26 +24,5 @@ public class SFX : MonoBehaviour
     public void PlayPlateDestroySound()
     {
         source.PlayOneShot(soundsBlockDestroyList[Random.Range(0, soundsBlockDestroyList.Count)]);
-        Debug.Log("played destroy");
     }
-
-    // public void PlayBuy()
-    // {
-    //     source.PlayOneShot(soundsList[1]);
-    // }
-
-    // public void PlayMade()
-    // {
-    //     source.PlayOneShot(soundsList[Random.Range(2, 4)]);
-    // }
-
-    // public void PlaySell()
-    // {
-    //     source.PlayOneShot(soundsList[4]);
-    // }
-
-    // public void PlayEnvironmentSet()
-    // {
-    //     source.PlayOneShot(soundsList[5]);
-    // }
 }

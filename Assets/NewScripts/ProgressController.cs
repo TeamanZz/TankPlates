@@ -49,6 +49,39 @@ public class ProgressController : MonoBehaviour
         moneyCountText.text = moneyCount.ToString();
     }
 
+    private void Start()
+    {
+        LoadPrefs();
+        InvokeRepeating("SaveProgress", 3, 3);
+    }
+
+    private void LoadPrefs()
+    {
+        moneyCount = PlayerPrefs.GetInt("MoneyCount", moneyCount);
+        damageLvl = PlayerPrefs.GetInt("DamageLVL", 1);
+        incomeLvl = PlayerPrefs.GetInt("IncomeLVL", 1);
+        dispatchLvl = PlayerPrefs.GetInt("DispatchLVL", 1);
+
+        damageUpgradeCost = damageLvl * 12;
+        incomeUpgradeCost = incomeLvl * 12;
+        dispatchUprageCost = dispatchLvl * 12;
+        tankTurret.SetNewProjectileDamage(damageLvl);
+        tankTurret.DecreaseDelayBetweenShoot(dispatchLvl);
+        moneyCountText.text = moneyCount.ToString();
+
+        InitializeCost();
+    }
+
+    private void SaveProgress()
+    {
+        PlayerPrefs.SetInt("MoneyCount", moneyCount);
+        PlayerPrefs.SetInt("DamageLVL", damageLvl);
+        PlayerPrefs.SetInt("IncomeLVL", incomeLvl);
+        PlayerPrefs.SetInt("DispatchLVL", dispatchLvl);
+
+        Debug.Log("Saved!");
+    }
+
     private void InitializeCost()
     {
         UpdateDamage();
@@ -135,7 +168,7 @@ public class ProgressController : MonoBehaviour
         moneyCount -= dispatchUprageCost;
 
         dispatchLvl += 1;
-        tankTurret.DecreaseDelayBetweenShoot();
+        tankTurret.DecreaseDelayBetweenShoot(1);
         dispatchUprageCost += dispatchPriceIncrease;
 
         UpdateDispatch();
