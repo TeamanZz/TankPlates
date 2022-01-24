@@ -7,9 +7,15 @@ public class MouseFollowing : MonoBehaviour
     private Vector3 lastMousePos = default;
 
     public Transform tankTransform;
-    public TankMovement tankMovement;
+    [SerializeField] private TankMovement tankMovement;
+    [SerializeField] private TankTurretRotation tankTurretRotation;
+    [SerializeField] private TankTurretShooting tankTurretShooting;
 
+    [SerializeField] private GameObject startPanel;
     private bool canMoveTank = true;
+
+    private bool isStartPanelEnabled = true;
+
 
     private void OnEnable()
     {
@@ -39,6 +45,15 @@ public class MouseFollowing : MonoBehaviour
 
         if (canMoveTank == false)
             return;
+
+        if (isStartPanelEnabled)
+        {
+            tankMovement.enabled = true;
+            tankTurretRotation.enabled = true;
+            tankTurretShooting.enabled = true;
+            startPanel.SetActive(false);
+            isStartPanelEnabled = false;
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

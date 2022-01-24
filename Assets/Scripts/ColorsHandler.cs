@@ -21,12 +21,19 @@ public class ColorsHandler : MonoBehaviour
         var truncatedNumber = (int)Math.Truncate((double)(value / 6));
 
         if (NeedSpawnRandomColorPlate(truncatedNumber))
-            return GetRandomPlateColor();
+        {
+            var num = (int)truncatedNumber + 1 - platesColors.Count + 1;
+            for (int i = 0; i < num; i++)
+                AddNewColorToArray();
+        }
 
         float minValue = (float)truncatedNumber * 6;
         float maxValue = (float)(truncatedNumber + 1) * 6;
 
         var tval = ((float)value - minValue) / (maxValue - minValue);
+        Debug.Log(truncatedNumber);
+        Debug.Log(truncatedNumber + 1);
+        Debug.Log("==============");
         Color lerpedColor = Color.Lerp(platesColors[truncatedNumber], platesColors[truncatedNumber + 1], tval);
 
         return lerpedColor;
@@ -34,7 +41,17 @@ public class ColorsHandler : MonoBehaviour
 
     private bool NeedSpawnRandomColorPlate(double truncatedNumber)
     {
-        return (int)truncatedNumber >= platesColors.Count;
+        // Debug.Log("trunc" + truncatedNumber);
+        // Debug.Log("colorsCount" + platesColors.Count);
+        // Debug.Log("======================");
+        // Debug.Log((int)truncatedNumber + 1 >= platesColors.Count);
+        return (int)truncatedNumber + 1 >= platesColors.Count;
+    }
+
+    private void AddNewColorToArray()
+    {
+        platesColors.Add(platesColors[UnityEngine.Random.Range(0, platesColors.Count)]);
+        textColors.Add(textColors[UnityEngine.Random.Range(0, textColors.Count)]);
     }
 
     private Color GetRandomPlateColor()
@@ -45,9 +62,6 @@ public class ColorsHandler : MonoBehaviour
     public Color GetTextColor(int value)
     {
         var truncatedNumber = (int)Math.Truncate((double)(value / 6));
-
-        if (NeedSpawnRandomColorPlate(truncatedNumber))
-            return GetRandomPlateColor();
 
         float minValue = (float)truncatedNumber * 6;
         float maxValue = (float)(truncatedNumber + 1) * 6;
