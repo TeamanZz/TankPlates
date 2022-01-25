@@ -22,7 +22,7 @@ public class TankTurretShooting : MonoBehaviour
     public void DecreaseDelayBetweenShoot(int value)
     {
 
-        delayBetweenShot -= value * 0.01f;
+        delayBetweenShot -= value * 0.001f;
     }
 
     public void SetNewProjectileDamage(int value)

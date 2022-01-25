@@ -79,7 +79,6 @@ public class ProgressController : MonoBehaviour
         PlayerPrefs.SetInt("IncomeLVL", incomeLvl);
         PlayerPrefs.SetInt("DispatchLVL", dispatchLvl);
 
-        Debug.Log("Saved!");
     }
 
     private void InitializeCost()
@@ -162,17 +161,18 @@ public class ProgressController : MonoBehaviour
 
     public void DispatchImprovement()
     {
-        if (moneyCount < dispatchUprageCost && dispatchLvl < 60)
+        moneyCount -= dispatchUprageCost;
+        dispatchUprageCost += dispatchPriceIncrease;
+        UpdateDispatch();
+        moneyCountText.text = moneyCount.ToString();
+
+        if (moneyCount < dispatchUprageCost && dispatchLvl >= 300)
             return;
 
-        moneyCount -= dispatchUprageCost;
 
         dispatchLvl += 1;
         tankTurret.DecreaseDelayBetweenShoot(1);
-        dispatchUprageCost += dispatchPriceIncrease;
 
-        UpdateDispatch();
 
-        moneyCountText.text = moneyCount.ToString();
     }
 }

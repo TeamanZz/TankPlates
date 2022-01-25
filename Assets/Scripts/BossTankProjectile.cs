@@ -31,7 +31,6 @@ public class BossTankProjectile : MonoBehaviour
         {
             if (plate.value <= 0)
             {
-                Debug.Log("s");
                 var localDamage = damage;
 
                 if (localDamage > 0)
