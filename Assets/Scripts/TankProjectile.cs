@@ -37,6 +37,12 @@ public class TankProjectile : MonoBehaviour
             if (!canInteract)
                 return;
 
+            if (BossesSpawner.Instance.lastSpawnedBoss != null && transform.position.z > BossesSpawner.Instance.lastSpawnedBoss.transform.position.z)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             var damageToProjectile = plate.value;
 
             if (damage > 0)

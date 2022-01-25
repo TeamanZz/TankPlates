@@ -10,6 +10,12 @@ public class TankTurretRotation : MonoBehaviour
 
     private int directionCoefficient = 1;
 
+    private void Start()
+    {
+        degreesPerSecond = Random.Range(15, 35);
+        rotateAngle = Random.Range(20, 55);
+    }
+
     private void FixedUpdate()
     {
         RotateTurretAutomaticaly();

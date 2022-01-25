@@ -27,6 +27,11 @@ public class BossTurret : MonoBehaviour
         currentHp = totalHp;
     }
 
+    private void Start()
+    {
+        delayBetweenShot = Random.Range(0.8f, 1.2f);
+    }
+
     public void TakeDamage(int value, Vector3 position)
     {
         var newParticles = Instantiate(damageParticles, position, Quaternion.identity, transform.parent);
